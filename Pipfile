@@ -1,0 +1,15 @@
+[[source]]
+verify_ssl = true
+name = "pypi"
+url = "https://pypi.org/simple"
+
+[packages]
+cython = "==0.28.2"
+pillow = "*"
+kivy = {git = "https://github.com/kivy/kivy", ref = "master"}
+buildozer = {ref = "master", git = "https://github.com/kivy/buildozer"}
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

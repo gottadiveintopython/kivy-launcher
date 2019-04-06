@@ -3,3 +3,5 @@
 .ropeproject
 bin
 .buildozer
+.venv
+.vscode
