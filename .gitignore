@@ -3,3 +3,6 @@
 .ropeproject
 bin
 .buildozer
+.venv
+.vscode
+Pipfile.lock

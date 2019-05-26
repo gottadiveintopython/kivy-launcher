@@ -1,12 +1,22 @@
 # -*- coding: utf-8 -*-
+def request_permissions():
+    from android.permissions import request_permissions, Permission
+    request_permissions([
+        Permission.READ_EXTERNAL_STORAGE,
+        Permission.WRITE_EXTERNAL_STORAGE,
+        Permission.INTERNET,
+        Permission.CAMERA,
+    ])
 
 
 def run_entrypoint(entrypoint):
     import runpy
     import sys
-    import os
-    entrypoint_path = os.path.dirname(entrypoint)
-    sys.path.append(os.path.realpath(entrypoint_path))
+    from os import environ, chdir
+    from os.path import realpath, dirname, join
+    entrypoint_path = realpath(dirname(entrypoint))
+    chdir(entrypoint_path)
+    environ["KIVY_HOME"] = join(entrypoint_path, ".kivy")
     runpy.run_path(
         entrypoint,
         run_name="__main__")
@@ -33,6 +43,8 @@ def dispatch():
         intent = activity.getIntent()
         entrypoint = intent.getStringExtra("entrypoint")
         orientation = intent.getStringExtra("orientation")
+
+        request_permissions()
 
         if orientation == "portrait":
             # SCREEN_ORIENTATION_PORTRAIT
